@@ -38,6 +38,7 @@
     ],
   ];
 
+  $isParking = $_GET['isParking'] === 'either' ? 'either' : filter_var($_GET['isParking'], FILTER_VALIDATE_BOOLEAN);
 ?>
 
 <!DOCTYPE html>
@@ -45,18 +46,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP Badwords</title>
+  <title>PHP Hotels</title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
 <body>
+
+  <div class="container py-5">
+    <form action="index.php" method="GET">
+
+      <div>
+        <label for="isParking">Cerca per Parcehggio</label>
+        <select name="isParking" id="isParking">
+          <option value="either" selected>Disponibilità Parcheggio</option>
+          <option value="true">Si</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <button type="submit">Invia</button>
+    </form>
+  </div>
     
   <div class="container pt-5">
     <div class="row row-cols-4">
 
       <?php foreach ($hotels as $hotel): ?>
+        <?php if ($isParking === $hotel['parking'] || !isset($isParking) || $isParking === 'either'): ?>
         <div class="col mb-3">
           <div class="card text-center">
             <div class="card-body">
@@ -68,13 +86,11 @@
             </div>
           </div>
         </div>
+        <?php endif ?>
       <?php endforeach ?>
 
     </div>
   </div>
-
-
-
 
 </body>
 </html>
