@@ -53,15 +53,28 @@
 </head>
 <body>
     
-  <?php foreach ($hotels as $hotel): ?>
-    <div>
-      <h2><?php echo $hotel['name'] ?></h2>
-      <p><?php echo $hotel['description'] ?></p>
-      <p>Pracheggio: <?php $parking = $hotel['parking'] ? 'Si' : 'No'; echo $parking ?></p>
-      <p>Voto: <?php echo $hotel['vote'] ?></p>
-      <p>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?></p>
+  <div class="container pt-5">
+    <div class="row row-cols-4">
+
+      <?php foreach ($hotels as $hotel): ?>
+        <div class="col mb-3">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title"><?php echo $hotel['name'] ?></h5>
+              <p class="card-text"><?php echo $hotel['description'] ?></p>
+              <p>Pracheggio: <?php $parking = $hotel['parking'] ? 'Si' : 'No'; echo $parking ?></p>
+              <p>Voto: <?php echo $hotel['vote'] ?></p>
+              <p>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?></p>
+            </div>
+          </div>
+        </div>
+      <?php endforeach ?>
+
     </div>
-  <?php endforeach ?>
+  </div>
+
+
+
 
 </body>
 </html>
