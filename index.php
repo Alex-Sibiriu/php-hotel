@@ -53,7 +53,15 @@
 </head>
 <body>
     
-  <h1>ciao</h1>
+  <?php foreach ($hotels as $hotel): ?>
+    <div>
+      <h2><?php echo $hotel['name'] ?></h2>
+      <p><?php echo $hotel['description'] ?></p>
+      <p>Pracheggio: <?php $parking = $hotel['parking'] ? 'Si' : 'No'; echo $parking ?></p>
+      <p>Voto: <?php echo $hotel['vote'] ?></p>
+      <p>Distanza dal centro: <?php echo $hotel['distance_to_center'] ?></p>
+    </div>
+  <?php endforeach ?>
 
 </body>
 </html>
