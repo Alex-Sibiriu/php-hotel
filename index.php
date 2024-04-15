@@ -39,9 +39,10 @@
   ];
 
   $isParking = isset($_GET['isParking']) ? $_GET['isParking'] : '';
+
+  $rating = isset($_GET['rating']) ? $_GET['rating'] : '';
 ?>
-<!-- $_GET['isParking'] === 'either' ? 'either' : filter_var($_GET['isParking'], FILTER_VALIDATE_BOOLEAN);
-?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,10 +57,10 @@
 <body>
 
   <div class="container py-5">
-    <form action="index.php" method="GET">
+    <form action="index.php" method="GET" class="d-flex justify-content-around">
 
       <div>
-        <label for="isParking">Cerca per Parcehggio</label>
+        <label for="isParking">Cerca per Parcheggio</label>
         <select name="isParking" id="isParking">
           <option value="" selected>Disponibilità Parcheggio</option>
           <option value="1">Si</option>
@@ -67,17 +68,17 @@
         </select>
       </div>
 
-      <!-- <div>
+      <div>
         <label for="rating">Cerca per Voto</label>  
         <select name="rating" id="rating">
-          <option value="either" selected>Qualsiasi Voto</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value="" selected>Qualsiasi Voto</option>
+          <option value="1">>1</option>
+          <option value="2">>2</option>
+          <option value="3">>3</option>
+          <option value="4">>4</option>
+          <option value="5">=5</option>
         </select>
-      </div> -->
+      </div>
 
       <button type="submit">Invia</button>
     </form>
@@ -89,7 +90,7 @@
       <?php foreach ($hotels as $hotel): ?>
         <?php
             $selectedParking = filter_var($isParking, FILTER_VALIDATE_BOOLEAN);
-            if ($selectedParking === $hotel['parking'] || $isParking === ''): ?>
+            if (($selectedParking === $hotel['parking'] || $isParking === '') && ($rating <= $hotel['vote'] || $rating === '')): ?>
         <div class="col mb-3">
           <div class="card text-center">
             <div class="card-body">
