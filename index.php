@@ -38,9 +38,10 @@
     ],
   ];
 
-  $isParking = $_GET['isParking'] === 'either' ? 'either' : filter_var($_GET['isParking'], FILTER_VALIDATE_BOOLEAN);
+  $isParking = isset($_GET['isParking']) ? $_GET['isParking'] : '';
 ?>
-
+<!-- $_GET['isParking'] === 'either' ? 'either' : filter_var($_GET['isParking'], FILTER_VALIDATE_BOOLEAN);
+?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,11 +61,23 @@
       <div>
         <label for="isParking">Cerca per Parcehggio</label>
         <select name="isParking" id="isParking">
-          <option value="either" selected>Disponibilità Parcheggio</option>
-          <option value="true">Si</option>
-          <option value="false">No</option>
+          <option value="" selected>Disponibilità Parcheggio</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
         </select>
       </div>
+
+      <!-- <div>
+        <label for="rating">Cerca per Voto</label>  
+        <select name="rating" id="rating">
+          <option value="either" selected>Qualsiasi Voto</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div> -->
 
       <button type="submit">Invia</button>
     </form>
@@ -74,7 +87,9 @@
     <div class="row row-cols-4">
 
       <?php foreach ($hotels as $hotel): ?>
-        <?php if ($isParking === $hotel['parking'] || !isset($isParking) || $isParking === 'either'): ?>
+        <?php
+            $selectedParking = filter_var($isParking, FILTER_VALIDATE_BOOLEAN);
+            if ($selectedParking === $hotel['parking'] || $isParking === ''): ?>
         <div class="col mb-3">
           <div class="card text-center">
             <div class="card-body">
